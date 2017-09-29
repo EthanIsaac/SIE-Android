@@ -23,8 +23,6 @@ public class RecognitionResultFragment extends Fragment {
             // When creating for the first time we need to add the default tags for the default image.
             LinearLayout resultView = (LinearLayout)inflater.inflate(R.layout.recognition_result_view, container, false);
             FlexboxLayout imageTagContainer = (FlexboxLayout)inflater.inflate(R.layout.tag_box, null, false);
-            imageTagContainer.addView(RecognitionResultBuilder.constructImageTag(inflater, "Blue Sky", "85%"));
-            imageTagContainer.addView((RecognitionResultBuilder.constructImageTag(inflater, "Landscape", "60%")));
             resultView.addView(imageTagContainer);
 
             return resultView;

@@ -6,4 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.ibm.visual_recognition.MainActivity">
 
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="59dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.43"></LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="¡Gracias por participar con tu voto!"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="247dp" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

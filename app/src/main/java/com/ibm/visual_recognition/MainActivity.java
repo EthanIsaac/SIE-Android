@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por el Sistema Inteligente Electoral se ha registrado.");
                                 insertar("1");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV2 = (Button) findViewById(R.id.buttonV2);
@@ -174,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por Chefsito se ha registrado.");
                                 insertar("2");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV3 = (Button) findViewById(R.id.buttonV3);
@@ -182,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por EDetect se ha registrado.");
                                 insertar("3");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV4 = (Button) findViewById(R.id.buttonV4);
@@ -190,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por E M D se ha registrado.");
                                 insertar("4");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV5 = (Button) findViewById(R.id.buttonV5);
@@ -198,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por EMIN se ha registrado.");
                                 insertar("5");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV6 = (Button) findViewById(R.id.buttonV6);
@@ -206,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por Cuic med se ha registrado.");
                                 insertar("6");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                         Button buttonV7 = (Button) findViewById(R.id.buttonV7);
@@ -214,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 textToSpeechAudio("Tu voto por T W T se ha registrado.");
                                 insertar("7");
+                                setContentView(R.layout.activity_final);
                             }
                         });
                     }
