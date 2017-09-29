@@ -46,6 +46,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 
@@ -163,29 +164,56 @@ public class MainActivity extends AppCompatActivity {
                         buttonV1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                textToSpeechAudio("Tu voto por el Partido Acción Nacional se ha registrado.");
-                                insertar();
+                                textToSpeechAudio("Tu voto por el Sistema Inteligente Electoral se ha registrado.");
+                                insertar("1");
                             }
                         });
                         Button buttonV2 = (Button) findViewById(R.id.buttonV2);
                         buttonV2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                textToSpeechAudio("Tu voto por el Partido de la Revolución Democrática se ha registrado.");
+                                textToSpeechAudio("Tu voto por Chefsito se ha registrado.");
+                                insertar("2");
                             }
                         });
                         Button buttonV3 = (Button) findViewById(R.id.buttonV3);
                         buttonV3.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                textToSpeechAudio("Tu voto por el Partido Revolucionario Institucional se ha registrado.");
+                                textToSpeechAudio("Tu voto por EDetect se ha registrado.");
+                                insertar("3");
                             }
                         });
                         Button buttonV4 = (Button) findViewById(R.id.buttonV4);
                         buttonV4.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                textToSpeechAudio("Tu voto por el Partido Movimiento Regeneración Nacional se ha registrado.");
+                                textToSpeechAudio("Tu voto por E M D se ha registrado.");
+                                insertar("4");
+                            }
+                        });
+                        Button buttonV5 = (Button) findViewById(R.id.buttonV5);
+                        buttonV5.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por EMIN se ha registrado.");
+                                insertar("5");
+                            }
+                        });
+                        Button buttonV6 = (Button) findViewById(R.id.buttonV6);
+                        buttonV6.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por Cuic med se ha registrado.");
+                                insertar("6");
+                            }
+                        });
+                        Button buttonV7 = (Button) findViewById(R.id.buttonV7);
+                        buttonV7.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por T W T se ha registrado.");
+                                insertar("7");
                             }
                         });
                     }
@@ -214,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class SQLConnect extends AsyncTask<String,Void,String> {
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(final String... params) {
             Thread thread = new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -226,7 +254,9 @@ public class MainActivity extends AppCompatActivity {
                             Class.forName("com.mysql.jdbc.Driver").newInstance();
                             Connection con = DriverManager.getConnection(url, user, password);
                             Statement st = con.createStatement();
-                            st.executeUpdate("INSERT INTO voto (no_ine, id_candidato) VALUES (1379696, 1)");
+                            Random rn = new Random();
+                            int randomNum = rn.nextInt((10000 - 10) + 1) + 10;
+                            st.executeUpdate("INSERT INTO voto (no_ine, id_candidato) VALUES (" + randomNum + ", " + params[0] + ")");
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         } catch (InstantiationException e) {
@@ -245,10 +275,10 @@ public class MainActivity extends AppCompatActivity {
             return "";
         }
     }
-    public void insertar()
+    public void insertar(String s)
     {
             SQLConnect con = new SQLConnect();
-            con.doInBackground();
+            con.doInBackground(s);
     }
     public void textToSpeechAudio(final String message){
         Thread thread = new Thread(new Runnable() {

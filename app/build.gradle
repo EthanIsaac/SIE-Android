@@ -28,6 +28,7 @@ android {
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('src/main/res/libs/mysql-connector-java-3.0.17-ga-bin.jar')
     compile 'com.ibm.mobilefirstplatform.clientsdk.android:core:[2.0.0,3.0.0)'
     compile 'com.ibm.watson.developer_cloud:visual-recognition:3.8.0'
     compile 'com.android.support:appcompat-v7:25.1.0'
@@ -35,6 +36,6 @@ dependencies {
     compile 'com.google.android:flexbox:0.2.3'
     compile 'com.ibm.watson.developer_cloud:text-to-speech:4.0.0'
     compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile files('src/main/res/libs/mysql-connector-java-3.0.17-ga-bin.jar')
 }
