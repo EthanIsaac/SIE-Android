@@ -12,7 +12,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@mipmap/bend"
         android:id="@+id/selectedImageView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

@@ -8,6 +8,21 @@
     android:fitsSystemWindows="true"
     tools:context="com.ibm.visual_recognition.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.ibm.visual_recognition.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <Button
+            android:id="@+id/buttonFinger"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fp" />
+
+    </RelativeLayout>
+
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -21,17 +36,5 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
-    <Button
-        android:id="@+id/continuar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:text="Continuar"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center_horizontal" />
-
-    <include layout="@layout/content_main"
-        android:id="@+id/include" />
 
 </android.support.design.widget.CoordinatorLayout>

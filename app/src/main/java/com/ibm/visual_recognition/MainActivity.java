@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,6 +41,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String mSelectedImageUri = null;
     private File output = null;
+    private Boolean flag = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -76,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        textToSpeech = new TextToSpeech();
+        textToSpeech.setUsernameAndPassword(TTS_username, TTS_password);
 
         // Set and create temp storage for camera to utilize when taking a picture
         if (savedInstanceState == null) {
@@ -111,10 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        textToSpeech = new TextToSpeech();
-        textToSpeech.setUsernameAndPassword(TTS_username, TTS_password);
-
-        textToSpeechAudio("Bienvenido. Por favor retírate lentes y objetos que te cubran el rostro y presiona el botón para el reconocimiento facial.");
+        textToSpeechAudio("¡Hola! Bienvenido al Sistema Inteligente Electoral. Por favor retírate lentes y objetos que puedan cubrir tu rostro, y presiona el botón de la cámara para tomar la foto.");
 
         ImageButton cameraButton = (ImageButton) findViewById(R.id.cameraButton);
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +147,51 @@ public class MainActivity extends AppCompatActivity {
         // Core SDK must be initialized to interact with Bluemix Mobile services.
         BMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_US_SOUTH);
 
-        
+        Button continuarB = (Button) findViewById(R.id.continuar);
+        continuarB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_finger_print);
+                textToSpeechAudio("Coloca tu dedo pulgar derecho en el lector.");
+                Button buttonFinger = (Button) findViewById(R.id.buttonFinger);
+                buttonFinger.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setContentView(R.layout.activity_votacion);
+                        textToSpeechAudio("Presiona sobre la foto de algún candidato para votar por él.");
+                        Button buttonV1 = (Button) findViewById(R.id.buttonV1);
+                        buttonV1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por el Partido Acción Nacional se ha registrado.");
+                                insertar();
+                            }
+                        });
+                        Button buttonV2 = (Button) findViewById(R.id.buttonV2);
+                        buttonV2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por el Partido de la Revolución Democrática se ha registrado.");
+                            }
+                        });
+                        Button buttonV3 = (Button) findViewById(R.id.buttonV3);
+                        buttonV3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por el Partido Revolucionario Institucional se ha registrado.");
+                            }
+                        });
+                        Button buttonV4 = (Button) findViewById(R.id.buttonV4);
+                        buttonV4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                textToSpeechAudio("Tu voto por el Partido Movimiento Regeneración Nacional se ha registrado.");
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
         
 
@@ -162,6 +212,44 @@ public class MainActivity extends AppCompatActivity {
         vct.execute();
     }
 
+    public class SQLConnect extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... params) {
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        String url = "jdbc:mysql://us-mm-auto-sl-dfw-01-a.cleardb.net:3306/ibmx_cec0e20ede2b77b";
+                        String user = "b2bca383df7d29";
+                        String password = "cf38232b";
+
+                        try {
+                            Class.forName("com.mysql.jdbc.Driver").newInstance();
+                            Connection con = DriverManager.getConnection(url, user, password);
+                            Statement st = con.createStatement();
+                            st.executeUpdate("INSERT INTO voto (no_ine, id_candidato) VALUES (1379696, 1)");
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.start();
+            return "";
+        }
+    }
+    public void insertar()
+    {
+            SQLConnect con = new SQLConnect();
+            con.doInBackground();
+    }
     public void textToSpeechAudio(final String message){
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -370,6 +458,7 @@ public class MainActivity extends AppCompatActivity {
 
         VisualClassification getVisualClassification() { return visualClassification;}
         DetectedFaces getDetectedFaces() {return detectedFaces;}
+
     }
 
     /**
